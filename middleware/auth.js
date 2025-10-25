@@ -1,0 +1,20 @@
+var JWT = require("jsonwebtoken");
+
+const authMiddleware = (req,res,next)=>
+{
+    const token=req.headers["authorization"];
+    if(token){
+        try{
+            var decoded = jwt.verify(token,process,env,SECRET_KEY);
+            req.user = decoded
+            next();
+
+        } catch(err){
+            res.status(401).json({message: err?.messag || "unauthorized"})
+        }
+    }else{
+        res.status(401).json({ messag: "Unauthorized"});
+    }
+}
+
+module.exports = authMiddleware;
