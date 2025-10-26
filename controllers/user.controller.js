@@ -17,6 +17,11 @@ const login = (phone, password) =>{
     return token
 };
 
+const getUserById = (id) =>{
+    return users.find(user=>user.id===id)
+}
+
 module.exports ={
     login,
+    getUserById
 }
